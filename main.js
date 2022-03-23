@@ -9,7 +9,7 @@ var map = new mapboxgl.Map({
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    fetch('https://docs.google.com/spreadsheets/d/1DmxeJff1bqYY-VgeRuyr9fmfNldNcNfIaCQEjT9j7Yc/gviz/tq?tqx=out:csv&sheet=Лист1')  // for testing (latfield: 'latitude', lonfield: 'longitude')
+    fetch('https://docs.google.com/spreadsheets/d/1DmxeJff1bqYY-VgeRuyr9fmfNldNcNfIaCQEjT9j7Yc/gviz/tq?tqx=out:csv&sheet=Лист1')  // for testing (latfield: 'lat', lonfield: 'lon')
         .then(response => response.text())
         .then(csvData => makeGeoJSON(csvData));
 
@@ -65,26 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
 
-                // // Unclustered points
-                // map.addLayer({
-                //     id: 'unclustered-points',
-                //     type: 'circle',
-                //     source: 'vacancies',
-                //     filter: ['!', ['has', 'point_count']],
-                //     paint: {
-                //     'circle-color': '#11b4da',
-                //     'circle-radius': 6,
-                //     'circle-stroke-width': 1,
-                //     'circle-stroke-color': '#fff'
-                //     }
-                // });
-
-
-                // When a click event occurs on a feature in the csvData layer, open a popup at the
-                // location of the feature, with description HTML from its properties.
+                // When a click event occurs on a feature in the clusters layer, open a modal
                 map.on('click', 'clusters', function (e) {
                     // console.log(e)
-                    // https://docs.mapbox.com/mapbox-gl-js/api/sources/#geojsonsource#getclusterleaves
+                    // DOCS: https://docs.mapbox.com/mapbox-gl-js/api/sources/#geojsonsource#getclusterleaves
                     const features = map.queryRenderedFeatures(e.point, {
                         layers: ['clusters']
                     });
@@ -107,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             });
                         });
                     }
-                    
+
                     modalInteractive.show()
                 });
 
@@ -122,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 // List
-                // https://getbootstrap.com/docs/5.0/examples/sidebars/
+                // DOCS: https://getbootstrap.com/docs/5.0/examples/sidebars/
                 document.getElementById("list").innerHTML = data.features.map(
                     feature =>
                         `<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" data-coords="${feature.geometry.coordinates}" onclick="map.flyTo({center: this.getAttribute('data-coords').split(','),zoom: 10})">
