@@ -1,7 +1,7 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ2hlcm1hbnQiLCJhIjoiY2pncDUwcnRmNDQ4ZjJ4czdjZXMzaHZpNyJ9.3rFyYRRtvLUngHm027HZ7A'; // <-- PUT YOUR MAPBOX ACCESSTOKEN
+mapboxgl.accessToken = 'pk.eyJ1Ijoidm9sdHVzeWEiLCJhIjoiLWhKZzhqWSJ9.X9CseVENK_v1Z9oF4T6Rkg'; // <-- PUT YOUR MAPBOX ACCESSTOKEN
 var map = new mapboxgl.Map({
     container: 'map', // container id 
-    style: 'mapbox://styles/ghermant/ckxn3cocf4fah14mmwmy7ieu0', // YOUR TURN: choose a style: https://docs.mapbox.com/api/maps/#styles
+    style: 'mapbox://styles/voltusya/cl26ccksv000114pc1gg63jsf', // YOUR TURN: choose a style: https://docs.mapbox.com/api/maps/#styles
     center: [37.625, 55.751], // starting position [lng, lat]
     zoom: 5, // starting zoom
     maxZoom: 10
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'source': 'vacancies',
                     'type': 'circle',
                     'paint': {
-                        'circle-color': '#7EC8E3',
+                        'circle-color': '#fae67f',
                         'circle-stroke-width': 1,
                         'circle-stroke-color': '#FFFFFF',
                         'circle-radius': [
@@ -76,7 +76,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (!features[0].properties.cluster_id) {  // if point is not within a cluster it has no cluster_id
                         var unclusteredFeature = features[0]
                         // console.log(clusteredFeatures)
-                        document.getElementById("inside-modal").innerHTML = `<h4>${unclusteredFeature.properties["Вакансия"]}</h4><a href="${unclusteredFeature.properties["Ссылка на сайте Картетики"]}">Подробнее</a>`
+                        document.getElementById("inside-modal").innerHTML = `<a href="${unclusteredFeature.properties["Ссылка на сайте Картетики"]}" target="_blank" class="list-group-item py-3 lh-tight">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                ${unclusteredFeature.properties.Вакансия}
+                            </div>
+                            <div class="col-10 mb-1 small text-muted">${unclusteredFeature.properties.Работодатель}</div>
+                            <div class="col-10 mb-1 small text-muted">Подробнее</div>
+                        </a>`
                     } else {
                         const clusterId = features[0].properties.cluster_id;
                         const pointCount = features[0].properties.point_count;
@@ -87,7 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             // console.log(clusteredFeatures)
                             document.getElementById("inside-modal").innerHTML = ""
                             clusteredFeatures.forEach(feature => {
-                                document.getElementById("inside-modal").innerHTML += `<h4>${feature.properties["Вакансия"]}</h4><a href="${feature.properties["Ссылка на сайте Картетики"]}">Подробнее</a><hr>`
+                                document.getElementById("inside-modal").innerHTML +=
+                                    `<a href="${feature.properties["Ссылка на сайте Картетики"]}" target="_blank" class="list-group-item py-3 lh-tight">
+                                        <div class="d-flex w-100 align-items-center justify-content-between">
+                                            ${feature.properties.Вакансия}
+                                        </div>
+                                        <div class="col-10 mb-1 small text-muted">${feature.properties.Работодатель}</div>
+                                        <div class="col-10 mb-1 small text-muted">Подробнее</div>
+                                    </a>`
                             });
                         });
                     }
@@ -109,9 +122,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 // DOCS: https://getbootstrap.com/docs/5.0/examples/sidebars/
                 document.getElementById("list").innerHTML = data.features.map(
                     feature =>
-                        `<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" data-coords="${feature.geometry.coordinates}" onclick="map.flyTo({center: this.getAttribute('data-coords').split(','),zoom: 10})">
+                        `<a href="#" class="list-group-item py-3 lh-tight" data-coords="${feature.geometry.coordinates}" onclick="map.flyTo({center: this.getAttribute('data-coords').split(','),zoom: 10})">
                             <div class="d-flex w-100 align-items-center justify-content-between">
-                                <strong class="mb-1">${feature.properties.Вакансия}</strong>
+                                ${feature.properties.Вакансия}
                             </div>
                             <div class="col-10 mb-1 small text-muted">${feature.properties.Работодатель}</div>
                         </a>`

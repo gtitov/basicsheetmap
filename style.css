@@ -1,21 +1,71 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
 }
 
 #togglelist {
-    margin: 1rem;
+  margin: 1rem;
+}
+
+.bi-card-list {
+  font-size: 2rem;
+  color: #fae67f;
+}
+
+#close-sidebar {
+    background-color: #fae67f;
 }
 
 .offcanvas-body {
-    padding-left: 0;
-    padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.offcanvas,
+.offcanvas-header,
+.list-group-item {
+  background-color: #151026;
+  color: #fae67f;
+  font-weight: 400;
+}
+
+.list-group-item:hover {
+    background-color: hsl(254, 41%, 15%);
+    color: #fae67f;
+  }
+
+  #inside-modal {
+    background-color: #151026;
+  }
+
+  #inside-modal > h4,   #inside-modal > a {
+    color: #fae67f;
+  }
+
+/* Chrome, Safari */
+::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #151026;
+}
+::-webkit-scrollbar-thumb:vertical {
+  height: 30px;
+  background-color: #fae67f;
+}
+
+#logo {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 4rem;
 }
