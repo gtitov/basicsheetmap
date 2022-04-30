@@ -7,6 +7,12 @@ var map = new mapboxgl.Map({
     maxZoom: 10
 });
 
+map.scrollZoom.disable();
+map.addControl(new mapboxgl.NavigationControl({
+        showCompass: false
+    }),
+'bottom-right');
+
 document.addEventListener('DOMContentLoaded', function () {
 
     fetch('https://docs.google.com/spreadsheets/d/1DmxeJff1bqYY-VgeRuyr9fmfNldNcNfIaCQEjT9j7Yc/gviz/tq?tqx=out:csv&sheet=Лист1')  // for testing (latfield: 'lat', lonfield: 'lon')
