@@ -17,11 +17,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     fetch('https://docs.google.com/spreadsheets/d/1DmxeJff1bqYY-VgeRuyr9fmfNldNcNfIaCQEjT9j7Yc/gviz/tq?tqx=out:csv&sheet=Лист1')  // for testing (latfield: 'lat', lonfield: 'lon')
         .then(response => response.text())
-        .then(csvData => makeGeoJSON(csvData));
+        .then(csvData => makeMap(csvData));
 
 
 
-    function makeGeoJSON(csvData) {
+    function makeMap(csvData) {
         csv2geojson.csv2geojson(csvData, {
             latfield: 'lat',
             lonfield: 'lon',
